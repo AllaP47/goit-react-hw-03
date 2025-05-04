@@ -1,0 +1,10 @@
+.list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.empty {
+  padding: 10px;
+  color: #777;
+}
