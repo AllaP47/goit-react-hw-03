@@ -31,6 +31,7 @@
   border-radius: 4px;
   cursor: pointer;
   width: 120px;
+  margin-left: 90px;
 }
 
 .button:hover {
