@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import ContactForm from "./component/ContactForm/ContactForm.jsx";
-import ContactList from "./component/ContactList/ContactList.jsx";
-import SearchBox from "./component/SearchBox/SearchBox.jsx";
-
+import ContactForm from "./component/ContactForm/ContactForm";
+import ContactList from "./component/ContactList/ContactList";
+import SearchBox from "./component/SearchBox/SearchBox";
 
 const initialContacts = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -12,40 +11,34 @@ const initialContacts = [
 ];
 
 function App() {
-  
   const [contacts, setContacts] = useState(() => {
-    const saved = localStorage.getItem("contacts");
-    return saved ? JSON.parse(saved) : initialContacts;
+    return JSON.parse(localStorage.getItem("contacts")) ?? initialContacts;
   });
 
   const [filter, setFilter] = useState("");
 
-  
   useEffect(() => {
     localStorage.setItem("contacts", JSON.stringify(contacts));
   }, [contacts]);
-
 
   const addContact = (newContact) => {
     const isDuplicate = contacts.some(
       (contact) => contact.name.toLowerCase() === newContact.name.toLowerCase()
     );
     if (isDuplicate) {
-      alert("Контакт з таким ім’ям вже існує.");
+      alert("A contact with that name already exists.");
       return;
     }
     setContacts((prev) => [...prev, newContact]);
   };
 
- 
   const deleteContact = (id) => {
     setContacts((prev) => prev.filter((contact) => contact.id !== id));
   };
 
- 
-  const filteredContacts = contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
+ const filteredContacts = contacts.filter((contact) =>
+  contact.name.toLowerCase().includes(filter.toLowerCase())
+);
 
   return (
     <div style={{ maxWidth: "600px", margin: "0 auto", padding: "1rem" }}>
@@ -58,4 +51,6 @@ function App() {
 }
 
 export default App;
+
+
 
